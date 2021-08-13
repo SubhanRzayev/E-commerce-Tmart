@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% load thumbnail %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <ul>
+            <li>
+                <div class="blog__wrap blog--page clearfix">
+                    <!-- Start Single Blog -->
+                    {% for blog in all_blogs %}
+                    <h1>Blogs</h1>
+                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                            <div class="blog foo">
+                                <div class="blog__inner">
+                                    <div class="blog__thumb">
+                                        <a href="{{blog.get_absolute_url}}">
+                                            {% thumbnail blog.cover_image "370x347" crop="center" as im %}
+                                                <img src="{{ im.url }}" width="270" height="270">
+                                            {% endthumbnail %}
+                                        </a>
+                                        <div class="blog__post__time">
+                                            <div class="post__time--inner">
+                                                <span class="date">{{blog.created_at.day}}</span>
+                                                <span class="month">{{blog.created_at.month}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blog__hover__info">
+                                        <h2>{{blog.title}}</h2>
+                                        <div class="blog__hovcommenter__action">
+                                       
+                                            <p class="blog__des"><a href="{{blog.get_absolute_url}}">{{blog.description|truncatewords:"10"}}</a></p>
+                                            <ul class="bl__meta">
+                                                <li>By :<a href="{{blog.get_absolute_url}}">{{blog.username}}</a></li>
+                                                <li>Product</li>
+                                            </ul>
+                                            <div class="blog__btn">
+                                                <a class="read__more__btn" href="{{blog.get_absolute_url}}">read more</a>
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}               
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="product__list another-product-style"><br>
+                        <h1>Products</h1>
+                        {% for product in all_products %}   
+                        <div class="col-md-3 single__pro col-lg-3 cat--1 col-sm-4 col-xs-12">
+                            <div class="product foo">
+                                <div class="product__inner">
+                                    <div class="pro__thumb">
+                                        <a href="#">
+                                            <img src="{{product.cover_image.url}}" alt="product images">
+                                        </a>
+                                    </div>
+                                    <div class="product__hover__info">
+                                        <ul class="product__action">
+                                            <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                            <li><a title="Add TO Cart"  href="{% url 'order:cart' %}"><span class="ti-shopping-cart "></span></a></li>
+                                        </ul> 
+                                    </div>
+                                </div>
+                                <div class="product__details">
+                                    <h2><a href="{{product.get_absolute_url}}">{{ product.title }}</a></h2>    
+                                    <ul class="product__price">
+                                        {% if product.discount_price %}
+                                        <li class="old__price">{{ product.price }}</li>
+                                        <li class="new__price">{{ product.discount_price }}</li> 
+                                        {% elif product.discount_price == 0.00 and product.sale != 0 %}
+                                        <li class="old__price">{{ product.price }}</li>
+                                        <li class="new__price">{% price product.price product.sale %}</li> 
+                                        {% elif product.discount_price == 0.00 and product.sale == 0 %}
+                                        <li class="new__price">{{ product.price }}</li>
+                                        {% endif %}    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+        
+    </div>
+        
+        
+        <!-- End Bradcaump area -->
+        <!-- Start BLog Area -->
+        
+                    
+    
+                        
+                        
+                        
+               
+        
+        
+                       
+                   
+               
+                   
+{% endblock %}

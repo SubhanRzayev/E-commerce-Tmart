@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+{% block content %}
+
+        <!-- End Offset Wrapper -->
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner text-center">
+                                <h2 class="bradcaump-title">Cart</h2>
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="index.html">Home</a>
+                                  <span class="brd-separetor">/</span>
+                                  <span class="breadcrumb-item active">Cart</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+        <!-- cart-main-area start -->
+        <div class="cart-main-area ptb--120 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <form action="#">               
+                            <div class="table-content table-responsive" id='product-list'>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">Image</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>
+                                            <th class="product-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% cart request as context %}
+                                    {% for item in context.items %}
+                                    {% if item.product.is_published %}
+                                    <tr>
+                                        <td class="product-thumbnail"><a href="#"><img
+                                                    src="{{item.product.cover_image.url}}" alt="product img" /></a></td>
+                                        <td class="product-name"><a href="{{product.get_absolute_url}}">{{item.product.title}}</a></td>
+                                        {% if item.product.discount_price %}
+                                            <td class="product-price"><span class="amount">£{{ item.product.discount_price }}</span></td>
+                                        {% elif item.product.discount_price == 0.00 and item.product.sale != 0 %}
+                                            <td class="product-price"><span class="amount">£{% price item.product.price item.product.sale %}</span></td>
+                                        {% elif item.product.discount_price == 0.00 and item.product.sale == 0 %}
+                                            <td class="product-price"><span class="amount">£{{item.product.price}}</span></td>
+                                        {% endif %}
+                                        <td>
+                                            <div style="display: flex; flex-direction:column; justify-content:center !important;">
+                                                <div style="width: 100%;">
+                                                    <img data-product="{{item.product.id}}" data-action="add"
+                                                    class="product-quantity update-cart"
+                                                    src="{% static  'images/add-remove/arrow-up.png' %} "
+                                                    style=" width: 15px; margin-bottom: 26px;">
+                                                </div>  
+                                                <span>{{item.quantity}}</span>
+                                                <div style="width: 100%s;">
+                                                <img data-product="{{item.product.id}}" data-action="remove"
+                                                    class="product-quantity update-cart"
+                                                    src="{% static  'images/add-remove/arrow-down.png' %}"
+                                                    style=" width: 15px;">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal">£{{item.get_total}}</td>
+                                        <td class="text-center"><a href="{% url 'order:deletefromcart' item.product.id %}">X</a></td>
+
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-sm-7 col-xs-12">
+                                    <div class="buttons-cart">
+                                            <a href="{% url 'products:shop' %}">Continue Shopping</a>
+                                    </div>
+                                    <div class="coupon">
+                                        <h3>Coupon</h3>
+                                        <p>Enter your coupon code if you have one.</p>
+                                        <input type="text" placeholder="Coupon code" />
+                                        <input type="submit" value="Apply Coupon" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-5 col-xs-12">
+                                    <div class="cart_totals">
+                                        <h2>Cart Totals</h2>
+                                        <table>
+                                            <tbody>
+                                                 <tr class="cart-subtotal">
+                                                    <th>Subtotal</th>
+                                                    {% cart request as context %}
+                                                    <td><span class="amount">£{{context.order.get_cart_total}}</span></td>
+                                                </tr> 
+                                                <tr class="shipping">
+                                                    <th>Shipping</th>
+                                                    <td>
+                                                        <ul id="shipping_method">
+                                                            <li>
+                                                                <input type="radio" /> 
+                                                                <label>
+                                                                    Free Shipping
+                                                                </label>
+                                                            </li>
+                                                            <li></li>
+                                                        </ul>
+                                                        <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="order-total">
+                                                    <th>Total</th>
+                                                    <td>
+                                                        <strong><span class="amount">£{{context.order.get_cart_total}}</span></strong>
+                                                    </td>
+                                                </tr>                                           
+                                            </tbody>
+                                        </table>
+                                        <div class="wc-proceed-to-checkout">
+                                            <a href="{% url 'order:checkout' %}">Proceed to Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- cart-main-area end -->
+        <!-- Start Footer Area -->
+        <!-- End Footer Area -->
+    </div>
+  
+
+{% endblock content %}

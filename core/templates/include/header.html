@@ -1,0 +1,230 @@
+{% load static i18n %}
+{% load custom_tags %}
+{% load thumbnail %}
+
+
+<header id="header" class="htc-header header--3 bg__white">
+            <!-- Start Mainmenu Area -->
+            <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
+                            <div class="logo">
+                                <a href="{% url 'core:index' %}">
+                                    <img src="{% static 'images/logo/logo.png' %}" alt="logo">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Start MAinmenu Ares -->
+                        <div class="col-md-8 col-lg-8 col-sm-6 col-xs-6">
+                            <nav class="mainmenu__nav hidden-xs hidden-sm">
+                                <ul class="main__menu">
+                                    <li class="drop"><a href="{% url 'core:index' %}">{% trans "Home" %}</a></li>
+                                    <li class="drop"><a href="{% url 'blog:blog' %}">{% trans 'Blog' %}</a></li>
+                                    <li class="drop"><a href="{% url 'products:shop' %}">{% trans 'Shop' %}</a></li>
+                                    <li><a href="{% url 'order:cart' %}">{% trans "cart" %}</a></li>
+                                    <li><a href="{% url 'order:wishlist' %}">{% trans "wishlist" %}</a></li>
+                                    <li><a href="{% url 'core:contact' %}">{% trans 'Contact Us' %}</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- End MAinmenu Ares -->
+                        <div class="col-md-2 col-sm-4 col-xs-3">  
+                            <ul class="menu-extra">
+                                <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
+                                {% if not user.is_authenticated %}
+                                    <li><a href="{% url 'accounts:login' %}"><span class="ti-user"></span></a></li>
+                                {% endif %}
+                                <li class="cart__menu"><p id ="cart-total"></p><span class="ti-shopping-cart"></span></li>
+                                <li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>
+                            {% if user.is_authenticated %}
+                                {{user.first_name}}
+                            <a href="{% url 'accounts:logout' %}" class="btn btn-black px-3 px-md-4 py-3">{% trans 'Logout' %}</a>   
+                            <a href="{% url 'accounts:password-change-view' %}" class="btn btn-black px-3 px-md-4 py-3"><span class="ti-cut"></span></a>   
+                            {% else %}
+                            <a href="{% url 'accounts:login' %}" class="btn btn-black px-3 px-md-4 py-3">{% trans 'Sign in' %}</a>
+                            {% endif %}
+                            </ul>
+                        </div>
+                        {% for city_weather in weather_data %}
+                        <div class="box" style="display: flex;">
+                            <article class="media">
+                                <div class="media-left">
+                                    <figure class="image is-50x50">
+                                        <img src="http://openweathermap.org/img/w/{{city_weather.icon}}.png" alt="Image">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <div class="content">
+                                        <p>
+                                            <span class="title">{{city_weather.city}}</span>
+                                            <br>
+                                            <span class="subtitle">{{city_weather.temperature}}° C</span>
+                                            <br> {{city_weather.description}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="mobile-menu-area"></div>
+                </div>
+            </div>
+            <!-- End Mainmenu Area -->
+</header>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="text-{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+     <div class="wrapper fixed__footer">
+        <!-- Start Header Style -->
+        <!-- End Header Style -->
+        
+        <div class="body__overlay"></div>
+        <!-- Start Offset Wrapper -->
+        <div class="offset__wrapper">
+            <!-- Start Search Popap -->
+            <div class="search__area">
+                <div class="container" >
+                    <div class="row" >
+                        <div class="col-md-12" >
+                            <div class="search__inner">
+                                <form action="{% url 'core:search' %}" role = "search">
+                                    <input placeholder="Search here... " type="text" name="q">
+                                    <button type="submit"></button>
+                                </form>
+                                <div class="search__close__btn">
+                                    <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Search Popap -->
+            <!-- Start Offset MEnu -->
+            <div class="offsetmenu">
+                <div class="offsetmenu__inner">
+                    <div class="offsetmenu__close__btn">
+                        <a href="#"><i class="zmdi zmdi-close"></i></a>
+                    </div>
+                    <div class="off__contact">
+                        <div class="logo">
+                            <a href="{% url 'core:index' %}">
+                                <img src="{% static 'images/logo/logo.png' %}" alt="logo">
+                            </a>
+                        </div>
+                        <p>{{user.first_name}} you can check our latest posts.</p>
+                    </div>
+                    {% navbar_photos as photos %}
+                    <ul class="sidebar__thumd">
+                        {% for photo in photos %} 
+                            <li>
+                                {% thumbnail photo.cover_image "370x347" crop="center" as im %}
+                                        <a href="https://www.instagram.com/"><img src="{{ im.url }}" width="70" height="70"></a>
+                                {% endthumbnail %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="offset__sosial__share">
+                        <div class="offset__single" style="">
+                            <h4 class="offset__title">Language</h4>
+                            <ul>
+                                <li style="top: 50px;">
+                                    <form action="{% url 'set_language' %}" method="post">
+                                        {% csrf_token %}
+                                        <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}" />
+                                        <ul class="nav navbar-nav navbar-right language menu">
+                                            {% get_current_language as LANGUAGE_CODE %}
+                                            {% get_available_languages as LANGUAGES %}
+                                            {% get_language_info_list for LANGUAGES as languages %}
+                                            {% for language in languages %}
+                                                <li style="right: 105px;">
+                                                    <button type="submit"
+                                                        name="language"
+                                                        value="{{ language.code }}"
+                                                        class="{% if language.code == LANGUAGE_CODE %}alert-warning{% endif %}">
+                                                           {{ language.name }}
+                                                    </button>
+                                                </li>
+                                            {% endfor %}</li>
+                                        </ul>
+                                    </form>     
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    </div><br>
+                    <div class="offset__sosial__share">
+                        <h4 class="offset__title">Follow Us On Social</h4>
+                        <ul class="off__soaial__link">
+                            <li><a class="bg--twitter" href="https://twitter.com/home"  title="Twitter"><i class="zmdi zmdi-twitter"></i></a></li>
+                            <li><a class="bg--instagram" href="https://www.instagram.com/" title="Instagram"><i class="zmdi zmdi-instagram"></i></a></li>
+                            <li><a class="bg--facebook" href="https://www.facebook.com/" title="Facebook"><i class="zmdi zmdi-facebook"></i></a></li>
+                            <li><a class="bg--google" href="https://www.amazon.com/" title="Google"><i class="zmdi zmdi-google"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End Offset MEnu -->
+            <!-- Start Cart Panel -->
+            
+             <div class="shopping__cart">
+            {% cart request as context %}
+                <div class="shopping__cart__inner">
+                    {% for item in context.items %}
+                    <div class="offsetmenu__close__btn">
+                        <a href="#"><i class="zmdi zmdi-close"></i></a>
+                    </div>
+                    <div class="shp__cart__wrap">
+                        <div class="shp__single__product">
+                            <div class="shp__pro__thumb">
+                                <a href="#">
+                                    <img src="{{item.product.cover_image.url}}" alt="product images">
+                                </a>
+                            </div>
+                            <div class="shp__pro__details">
+                                <h2><a href="product-details.html">{{item.product.title}}</a></h2>
+                                <span class="quantity">{{item.quantity}}</span>
+                                    <span class="shp__price">${{item.get_total}}</span></td>
+                            </div>
+
+                            <div class="remove__btn">
+                                <a href="{% url 'order:deletefromcart' item.product.id %}" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}    
+                    
+                    
+                    <ul class="shoping__total">
+                        <li class="subtotal">Subtotal:</li>
+                        <li class="total__price">${{context.order.get_cart_total}}</li>
+                    </ul>
+                    <ul class="shopping__btn">
+                        <li><a href="{% url 'order:cart' %}">View Cart</a></li>
+                        <li class="shp__checkout"><a href="{% url 'order:checkout' %}">Checkout</a></li>
+                    </ul>
+                
+                </div>
+                
+            </div>
+            
+        <!-- End Cart Panel -->
+
+        </div>
+    {% block content %}
+
+    {% endblock %}
+{% block js %}
+
+<script src="{% static 'js/currency.js' %}"></script>
+
+{% endblock %}

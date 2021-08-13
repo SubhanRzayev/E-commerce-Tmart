@@ -1,0 +1,431 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% load custom_tags %}
+{% load thumbnail %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/star-rating.css' %}">
+    <!-- Body main wrapper start -->
+        
+        <!-- End Offset Wrapper -->
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner text-center">
+                                <h2 class="bradcaump-title">Product Details</h2>
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="{% url 'core:index' %}">Home</a>
+                                  <span class="brd-separetor">/</span>
+                                  <span class="breadcrumb-item active">Product Details</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+        <!-- Start Product Details -->
+        {% if product.is_published %}
+        <section class="htc__product__details pt--120 pb--100 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                        <div class="product__details__container">
+                            <!-- Start Small images --> 
+                            <ul class="product__small__images" role="tablist">
+                            {% for img in product.product_image.all %}
+                                <li role="presentation" class="pot-small-img active">
+                                    {% thumbnail img.image "434x542" crop="center" as im %}
+                                        <img src="{{ im.url }}" width="120" height="140">
+                                    {% endthumbnail %}
+                                </li> 
+                                
+                            {% endfor %}
+                            </ul>
+                            
+                            <!-- End Small images -->
+                            <div class="product__big__images">
+                                <div class="portfolio-full-image tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active product-video-position" id="img-tab-1">
+                                        {% comment %} <img src="{{product.cover_image.url}}" alt="full-image"> {% endcomment %}
+                                        {% thumbnail product.cover_image "434x542" crop="center" as im %}
+                                            <img src="{{ im.url }}" width="440" height="590">
+                                        {% endthumbnail %}
+                                        <div class="product-video">
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade product-video-position" id="img-tab-2">
+                                        <img src="{% static 'images/product-details/big-img/12.jpg' %}" alt="full-image">
+                                        <div class="product-video">
+                                            <a class="video-popup" href="">
+                                                <i class="zmdi zmdi-videocam"></i> View Video
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade product-video-position" id="img-tab-3">
+                                        <img src="{% static 'images/product-details/big-img/11.jpg' %}" alt="full-image">
+                                        <div class="product-video">
+                                            <a class="video-popup" href="https://www.youtube.com/watch?v=cDDWvj_q-o8">
+                                                <i class="zmdi zmdi-videocam"></i> View Video
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade product-video-position" id="img-tab-4">
+                                        <img src="{% static 'images/product-details/big-img/12.jpg' %}" alt="full-image">
+                                        <div class="product-video">
+                                            <a class="video-popup" href="https://www.youtube.com/watch?v=cDDWvj_q-o8">
+                                                <i class="zmdi zmdi-videocam"></i> View Video
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 smt-30 xmt-30">
+                        <div class="htc__product__details__inner">
+                            <div class="pro__detl__title">
+                                <h2>{{ product.title}}</h2>
+                            </div>
+                            <div class="pro__dtl__rating">
+                            {% rating as rate %}
+                            {{product.id}}
+                            {{rate}}
+                                <ul class="rating" style="color: #f3c258;">
+                                    {% if  rate <= 1%}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                    {% elif  rate <= 1.5 %}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star-half"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                    {% elif  rate <= 2 %}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                    {% elif  rate <= 2.5 %}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star-half"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                    {% elif  rate <= 3 %}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                    {% elif  rate <= 3.5 %}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star-half"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                    {% elif  rate <= 4 %}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="ti-star"></i></li>
+                                    {% elif  rate <= 4.5 %}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star-half"></i></li>
+                                    {% elif  rate <= 5 %}
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                        <li><i class="zmdi zmdi-star"></i></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <div class="pro__details">
+                                <p>{{ product.description }}</p>
+                            </div>
+                            <ul class="pro__dtl__prize">
+                            {% if product.discount_price %}
+                                <li class="old__prize">{{ product.price }}</li>
+                                <li>{{ product.discount_price }}</li> 
+                            {% elif product.discount_price == 0.00 and product.sale != 0 %}
+                                <li class="old__prize">{{ product.price }}</li>
+                                <li>{% price product.price product.sale %}</li> 
+                            {% elif product.discount_price == 0.00 and product.sale == 0  %}
+                                <li>{{ product.price }}</li>
+                            {% endif %}
+                            </ul>
+                            <span class="product_id" style="display:none;">{{product.id}}</span>
+                            <input class="product_id" type="hidden">
+                            <div class="pro__dtl__color">
+                                <h2 class="title__5">Choose Colour</h2>
+                                <ul class="pro__choose__color">
+                                {% for color in product.colors.all %}
+                                    <li class="{{ color.color |lower}}"><a href="#"><i class="zmdi zmdi-circle"></i></a></li>
+                                
+                                {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="pro__dtl__size">
+                                <h2 class="title__5">Size</h2>
+                                <ul class="pro__choose__size">
+                                {% for size in product.sizes.all %}
+                                    <li><a href="#">{{ size.size }}</a></li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="product-action-wrap">
+                                <div class="prodict-statas"><span></span></div>
+                                <div class="product-quantity">
+                                    <form id='myform' method='POST' action='#'>
+                                        <div class="product-quantity">
+                                            <div class="cart-plus-minus">
+                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="{{ product.quantity }}">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <ul class="pro__dtl__btn">
+                                <li><button  data-product={{product.id}} data-action="add" class="buy__now__btn update-cart" 
+                                    style="border: 1px solid #d5d5d5;
+                                        display: inline-block;
+                                        font-size: 14px;
+                                        height: 45px;
+                                        line-height: 41px;
+                                        padding: 0 40px;
+                                        text-transform: uppercase;
+                                        transition: 0.4s;">ADD TO CART</button></li>
+                                <li><button  data-product={{product.id}} data-action="add" class="buy__now__btn update-cart"
+                                    style="background-color: transparent;border-style: none;font-size: 36px;"><span class="ti-heart"></span></button></li>
+                            </ul>
+                            <div class="pro__social__share">
+                                <h2>Share :</h2>
+                                <ul class="pro__soaial__link">
+                                    <li><a href="https://twitter.com/home"><i class="zmdi zmdi-twitter"></i></a></li> 
+                                    <li><a href="https://www.instagram.com/"><i class="zmdi zmdi-instagram"></i></a></li>
+                                    <li><a href="https://www.facebook.com/"><i class="zmdi zmdi-facebook"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        <!-- End Product Details -->
+        <!-- Start Product tab -->
+        {% if product.is_published %}
+        <section class="htc__product__details__tab bg__white pb--120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <ul class="product__deatils__tab mb--60" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#description" role="tab" data-toggle="tab">Description</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#sheet" role="tab" data-toggle="tab">Data sheet</a>
+                            </li>
+                            <li role="presentation" class="review_class">
+                                <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product__details__tab__content">
+                            <!-- Start Single Content -->
+                            <div role="tabpanel" id="description" class="product__tab__content fade in active">
+                                <div class="product__description__wrap">
+                                    <div class="product__desc">
+                                        <h2 class="title__6">Details</h2>
+                                        <p>{{product.description}}</p>
+                                    </div>
+                                    <div class="pro__feature">
+                                        <h2 class="title__6">Features</h2>
+                                        <ul class="feature__list">
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Content -->
+                            <!-- Start Single Content -->
+                            <div role="tabpanel" id="sheet" class="product__tab__content fade">
+                                <div class="pro__feature">
+                                        <h2 class="title__6">Data sheet</h2>
+                                        <ul class="feature__list">
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <!-- End Single Content -->
+                            <!-- Start Single Content -->
+                            <div role="tabpanel" id="reviews" class="product__tab__content fade">
+                                <div class="review__address__inner">
+                                    <!-- End Single Review -->
+                                    {% for comment in product.review.all %}
+                                    <!-- Start Single Review -->
+                                    <div class="pro__review">
+                                        <div class="review__thumb">
+                                            <img src="{% static 'images/review/profil_photo.jpg' %}" alt="review images" style="width: 80px; height: 80px;">
+                                        </div>
+                                        <div class="review__details">
+                                            <div class="review__info">
+                                                <h4><a href="#">{{ comment.name }}</a></h4>
+                                                <ul class="rating">
+                                                {% if comment.rate is 1%}
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                {% elif comment.rate is 2 %}
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                {% elif comment.rate is 3 %}
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                {% elif comment.rate is 4 %}
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="ti-star"></i></li>
+                                                {% elif comment.rate is 5 %}
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                {% endif %}
+                                                </ul> 
+                                            </div>
+                                            <div class="review__date">
+                                                <span>{{ comment.created_at }}</span>
+                                            </div>
+                                            <p>{{ comment.message }}</p>
+                                        </div>
+                                    </div><br/><br/>
+                                    {% for comment_comment in comment.comments.all %}
+                                    <div class="pro__review ans">
+                                        <div class="review__thumb">
+                                            <img src="{% static 'images/review/profil_photo.jpg' %}" alt="review images" style="width: 80px; height: 80px;">
+                                        </div>
+                                        <div class="review__details">
+                                            <div class="review__info">
+                                                <h4><a href="#">{{ comment_comment.name }}</a></h4>
+                                                <ul class="rating">
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                                </ul>
+                                                <div class="rating__send">
+                                                    <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="review__date">
+                                                <span>{{ comment_comment.created_at }}</span>
+                                            </div>
+                                            <p>{{ comment_comment.message }}</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                </div> <br/><br/>
+                                <!-- Start RAting Area -->
+                                <form  class="rate-form" method="POST" >
+                                {% csrf_token %}
+                                <div class="rating__wrap">
+                                    <h2 class="rating-title">Write A review</h2>
+                                    <h4 class="rating-title-2">Your Rating</h4>
+                                    <div class="rating__list">
+                                        <!-- Start Single List -->
+                                        <fieldset class="rating">
+                                            <input type="radio" id="star5" name="rate" value="5" onclick="fifthStar()"><label for="star5" class="full"></label>
+                                            <input type="radio" id="star4" name="rate" value="4" onclick="forstStar()"><label for="star4" class="full"></label>
+                                            <input type="radio" id="star3" name="rate" value="3" onclick="thirdStar()"><label for="star3" class="full"></label>
+                                            <input type="radio" id="star2" name="rate" value="2" onclick="secondStar()"><label for="star2" class="full"></label>
+                                            <input type="radio" id="star1" name="rate" value="1" onclick="firstStar()"><label for="star1" class="full"></label>
+                                        </fieldset>
+                                    </div>
+                                </div> 
+                                <!-- End RAting Area -->
+                                <div class="review__box">
+                                    {{ form.non_field_errors }}
+                                    <div class="single-review-form">
+                                        <div class="review-box name">
+                                            {{ form.name }}
+                                            {{ form.email }}
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="pro_id" value="" name="product">
+                                    <div class="single-review-form">
+                                        <div class="review-box message">
+                                        {{ form.message }}
+                                        </div>
+                                    </div>
+                                    <div class="review-btn">
+                                        <button class="fv-btn" type="submit" style="border: 1px solid #d5d5d5;
+                                        display: inline-block;
+                                        font-size: 14px;
+                                        height: 45px;
+                                        line-height: 41px;
+                                        padding: 0 40px;
+                                        text-transform: uppercase;
+                                        transition: 0.4s;">SUBMIT REVIEW</button>
+                                    </div>  
+
+                                </div>
+                                </form>
+                            </div>
+                            <!-- End Single Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        <!-- End Product tab -->
+        <!-- Start Footer Area -->
+        <!-- End Footer Area -->
+    </div>
+    <!-- Body main wrapper end -->
+    
+ 
+<script src="{% static 'js/star-raing.js' %}"></script>
+{% endblock content %}

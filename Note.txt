@@ -1,0 +1,226 @@
+https://stackoverflow.com/questions/62340760/django-reply-for-comments-getting-posted-as-comments-how-to-have-the-reply-for
+https://www.codesnail.com/adding-django-threaded-comments-in-blog-django-blog-6/
+https://demo.hasthemes.com/tmart-preveiw/tmart/index.html#  
+https://www.youtube.com/watch?v=j7vj4k13xDY
+How to solve this error?{"error_type": "OAuthException", "code": 400, "error_message": "Invalid platform app"}
+
+path('comment/reply/', views.reply_page, name="reply"),
+Db Designer
+https://sqlspy.io/import_db_designer/c3B5LTI5NDE3MDYtMjA5ODgwNjQ2M2IzMWExMC00MjYzMTM=
+
+Extra notes
+from blog.models import *
+
+Comment.objects.all().order_by('created_at')[:3]
+
+Blog.objects.all()
+Catagory.objects.all()
+
+Blog.objects.filter(title='test')
+
+catagory = 1
+Blog.objects.filter(catagory=catagory).order_by('created_at')[:4]
+
+Comment.objects.all().count(name)
+
+
+"""
+from django.db.models import Count
+from django.db.models import Max
+
+Comment.objects.values('comment').annotate(Count('comment'))
+
+a = Comment.objects.values('replies').annotate(Count('comment'))
+b = list(a)
+
+for i in b:
+   for j in i.values():
+                j.order_by()
+            break
+    break
+"""
+
+
+
+<<<<<<< HEAD
+Blog.objects.values('tags')
+=======
+#     #information
+#     size = models.TextField(max_length=5)
+
+
+#     def __str__(self):
+#         return self.size
+
+
+# class Price(models.Model):
+#     """
+#     Price model's save all products price range. 
+#     Ex: 0.00$ - 50.0$ , 50.00$ - 100.0$, 100.00$ - 150.0$ ...
+#     """
+#     #relation
+#     prices_range = models.ManyToManyField('Product', db_index=True, related_name='+', blank=True)
+
+#     #information
+#     price = models.TextField(max_length=50)
+
+#     def __str__(self):
+#         return self.price ()
+
+product = Product.objects.all().values('price',created_at)
+
+{% comment %} 
+# admin.site.register(Color)
+# admin.site.register(SortBy)
+# admin.site.register(Size)
+# admin.site.register(Price)
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+accounts
+loginregister
+
+sbdfjsbf
+=======
+ {% endcomment %}
+>>>>>>> fbf38f7ab2a85c08ec5d48b243a0bbecf3fef598
+
+
+#Star color
+color: #f3c258;
+
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5fa412373aa351d81b7b811b5aecdbcda58fd1f4
+<<<<<<< HEAD
+**************************************************************************************************
+python3 manage.py shell 
+
+from django.contrib.auth.models import User
+from products.models import *
+from django.db.models import Count
+
+from datetime import datetime
+import dateutil.relativedelta
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+user_last_login = User.objects.all()
+
+for i in user_last_login:
+    x = i.last_login.replace(tzinfo=None)
+    y = datetime.now()
+    z = y - x
+    print(z[:0])
+
+objects.all().annotate(tag_count = Count(comment)).order_by(‘-tag_count’)[:5]
+a = Review.objects.all().annotate(tag_count = Count(comment)).order_by('-tag_count')[:5]
+Review.objects.all().annotate(tag_count = Count('comment')).order_by('-tag_count')[:5]
+
+user_last_login = User.objects.all()
+
+
+
+
+
+
+a = datetime.timedelta(days=1, seconds=68746, microseconds=596853)
+=======
+  def get_absolute_url(self):
+        return reverse_lazy('blog:blog_detail', kwargs={
+            'slug': self.slug
+        })
+
+https://stackoverflow.com/questions/61967695/django-error-from-views-when-submitting-comment-
+
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = "post_detail.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PostDetailView, self).get_context_data()
+        post = get_object_or_404(Post, slug=self.kwargs['slug'])
+        comments = Comment.objects.filter(
+            post=post, reply=None).order_by('-id')
+        total_likes = post.total_likes()
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        if self.request.method == 'POST':
+            comment_form = CommentForm(self.request.POST or None)
+            if comment_form.is_valid():
+                content = self.request.POST.get('content')
+                reply_id = self.request.POST.get('comment_id')
+                comment_qs = None
+
+                if reply_id:
+                    comment_qs = Comment.objects.get(id=reply_id)
+                comment = Comment.objects.create(
+                    post=post, user=request.user, content=content, reply=comment_qs)
+                comment.save()
+                return HttpResponseRedirect("post_detail.html")
+        else:
+            comment_form = CommentForm()
+
+        context["total_likes"] = total_likes
+        context["liked"] = liked
+        context["comments"] = comments
+        context["comment_form"] = comment_form
+        return context
+
+class PostCommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+
+    def form_valid(self, form):
+        post = get_object_or_404(Post, slug=self.kwargs['slug'])
+        form.instance.user = self.request.user
+        form.instance.post = post
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('score:post-detail', kwargs=dict(slug=self.kwargs['slug']))
+
+
+https://stackoverflow.com/questions/62110558/replies-to-comments-submitted-as-new-comments-in-django
+>>>>>>> origin/comment
+
+
+def deletefromcart(request,id):
+    customer = request.user
+    
+    OrderItem.objects.filter(product__id=id, order__customer=customer).delete()
+    messages.success(request,"Product is deleted")
+    return redirect('order:cart')
+
+
+td class="text-center"><a href="{% url 'order:deletefromcart' item.product.id %}" onclick="return confirm('Delete ! Are you sure?')">X</a></td>
+
+<input id="form-button" class="btn-btn-success btn-block" type="submit" value="Continue">
+
+
+if (user != 'AnonymousUser'){
+        document.getElementById('user-info').innerHTML = ''
+        }
+    if (shipping == 'False' && user != 'AnonymousUser'){
+        //Hide entire form if user is logged in and shipping is false
+            document.getElementById('form-wrapper').classList.add("hidden");
+            //Show payment if logged in user wants to buy an item that does not require shipping
+            document.getElementById('payment-info').classList.remove("hidden");
+
+https://www.youtube.com/watch?v=722A27IoQnk
+
+stripe.error.InvalidRequestError: Request req_3ZvfAclMVh31vH: Amount must convert to at least 50 cents. ₹0.01 converts to approximately $0.00.
+sb-84sov1326734@business.example.com
+
+success_url = reverse_lazy("core:contact")
+success_url = reverse_lazy("core:contact")

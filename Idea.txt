@@ -1,0 +1,25 @@
+from products.models import *
+
+x = "LATEST"
+y = "BEST SALE"
+a = SortBy.objects.filter(sortby=x).values()
+
+for i in a:
+    if i['sortby'] == x:
+        Product.objects.filter(sortsby__sortby=x)
+
+
+b = Product.objects.filter(sortby=x).values()
+for i in a:
+    print(i['sortby'])
+
+******************************************************************************
+
+list = ["LATEST","BEST SALE"]
+
+for list_items in list:
+    for i in SortBy.objects.filter(sortby=list_items).values():
+        if i['sortby'] == list_items:
+            a = Product.objects.filter(sortsby__sortby=list_items)
+            for all_products in a:
+                print(all_products)

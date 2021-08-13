@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+
+{% block content %}
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->  
+
+    
+        <!-- End Offset Wrapper -->
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0)  no-repeat scroll center center / cover ;">
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner text-center">
+                                <h2 class="bradcaump-title">Blog</h2>
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="index.html">Home</a>
+                                  <span class="brd-separetor">/</span>
+                                  <span class="breadcrumb-item active">Blog</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+        <!-- Start BLog Area -->
+        <div class="htc__blog__area bg__white ptb--120">
+            <div class="container">
+                <div class="row">
+                    <div class="blog__wrap blog--page clearfix">
+                        <!-- Start Single Blog -->
+                        {% for blog in blog_list %}
+                        {% if blog.is_published %}
+                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                            <div class="blog foo">
+                                <div class="blog__inner">
+                                    <div class="blog__thumb">
+                                        <a href="{{blog.get_absolute_url}}">
+                                            {% thumbnail blog.cover_image "370x347" crop="center" as im %}
+                                                <img src="{{ im.url }}" width="270" height="270">
+                                            {% endthumbnail %}
+                                        </a>
+                                        <div class="blog__post__time">
+                                            <div class="post__time--inner">
+                                                <span class="date">{{blog.created_at.day}}</span>
+                                                <span class="month">{{blog.created_at.year}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blog__hover__info">
+                                        <h2>{{blog.title}}</h2>
+                                        <div class="blog__hovcommenter__action">
+                                       
+                                            <p class="blog__des"><a href="{{blog.get_absolute_url}}">{{blog.description|truncatewords:"10"}}</a></p>
+                                            <ul class="bl__meta">
+                                                <li>By :<a href="{{blog.get_absolute_url}}">{{blog.username}}</a></li>
+                                                <li>Product</li>
+                                            </ul>
+                                            <div class="blog__btn">
+                                                <a class="read__more__btn" href="{{blog.get_absolute_url}}">read more</a>
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        <!-- End Single Blog -->
+                       
+                    </div>
+                </div>
+                <!-- Start Load More BTn -->
+                <div class="row mt--60">
+                    <div class="col-md-12">
+                        <div class="htc__loadmore__btn">
+                            <a href="#">load more</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Load More BTn -->
+            </div>
+        </div>
+        <!-- End BLog Area -->
+        <!-- Start Footer Area -->
+        <!-- End Footer Area -->
+    
+
+{% endblock content %}

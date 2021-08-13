@@ -1,0 +1,219 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-03 14:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: Tmart/settings.py:237
+msgid "English"
+msgstr ""
+
+#: Tmart/settings.py:238
+msgid "Azerbaijani"
+msgstr ""
+
+#: Tmart/settings.py:239
+msgid "Turkiye"
+msgstr ""
+
+#: accounts/forms.py:14
+msgid "Password"
+msgstr ""
+
+#: accounts/forms.py:24
+msgid "Password confirmation"
+msgstr ""
+
+#: accounts/forms.py:30
+msgid "Enter the same password as before, for verification."
+msgstr ""
+
+#: accounts/forms.py:76
+msgid "Email"
+msgstr ""
+
+#: accounts/forms.py:83 accounts/forms.py:112
+msgid "New password"
+msgstr ""
+
+#: accounts/forms.py:94 accounts/forms.py:118
+msgid "New password confirmation"
+msgstr ""
+
+#: accounts/forms.py:104
+msgid "Old password"
+msgstr ""
+
+#: accounts/models.py:8
+msgid "email address"
+msgstr ""
+
+#: accounts/templates/email/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: accounts/templates/email/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: accounts/templates/email/password_reset_email.html:8
+msgid "Your username, in case you’ve forgotten:"
+msgstr ""
+
+#: accounts/templates/email/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: accounts/templates/email/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: accounts/templates/reset_password.html:30
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: core/templates/include/footer.html:24
+msgid "Elektron hökümət (E-gov), 1-ci mərtəbə, 19 Ataturk  avenue, Baku 1069"
+msgstr ""
+
+#: core/templates/include/footer.html:56 products/models.py:156
+msgid "Categories"
+msgstr "Kateqoriyalar"
+
+#: core/templates/include/footer.html:72
+msgid "Information"
+msgstr "Məlumat"
+
+#: core/templates/include/footer.html:74
+msgid "About Us"
+msgstr "Bizim haqqımızda"
+
+#: core/templates/include/footer.html:75
+#, fuzzy
+#| msgid "Contact"
+msgid "Contact Us"
+msgstr "Əlaqə"
+
+#: core/templates/include/footer.html:82
+msgid "Newsletter"
+msgstr "Bülleten"
+
+#: core/templates/include/footer.html:84
+msgid "Subscribe to our newsletter and get 10%% off your first purchase ."
+msgstr "Bülletenimizə abunə olun və ilk alışınızda 10% endirim əldə edin."
+
+#: core/templates/include/footer.html:117
+msgid "Free themes Cloud"
+msgstr "Pulsuz Bulud Mövzular"
+
+#: core/templates/include/footer.html:118
+msgid "All Right Reserved"
+msgstr "Bütün hüquqlar qorunur"
+
+#: core/templates/include/header.html:22
+msgid "Home"
+msgstr "Ana səhifə"
+
+#: core/templates/include/header.html:30
+msgid "Blog"
+msgstr "Xəbərlər"
+
+#: core/templates/include/header.html:37
+msgid "Shop"
+msgstr "Mağaza"
+
+#: core/templates/include/header.html:69
+msgid "Pages"
+msgstr "Səhifələr"
+
+#: core/templates/include/header.html:71
+msgid "about"
+msgstr "Haqqında"
+
+#: core/templates/include/header.html:72
+msgid "shop"
+msgstr "mağaza"
+
+#: core/templates/include/header.html:73
+msgid "cart"
+msgstr "Səbət"
+
+#: core/templates/include/header.html:74
+msgid "wishlist"
+msgstr "İstək siyahısı"
+
+#: core/templates/include/header.html:75
+msgid "checkout"
+msgstr "Yoxla"
+
+#: core/templates/include/header.html:76
+msgid "team"
+msgstr "komanda"
+
+#: core/templates/include/header.html:77
+msgid "login & register"
+msgstr "daxil olun və qeydiyyatdan keçin"
+
+#: core/templates/include/header.html:80
+msgid "Contact"
+msgstr "Əlaqə"
+
+#: core/templates/include/header.html:138
+msgid "Logout"
+msgstr "Hesabdan çıxış"
+
+#: core/templates/include/header.html:141
+msgid "Sign in"
+msgstr "Hesaba daxil ol"
+
+#: core/templates/index.html:25
+msgid "New Product"
+msgstr "Yeni Məhsul"
+
+#: core/templates/index.html:25
+msgid "Collection"
+msgstr "Kolleksiya"
+
+#: core/templates/index.html:27
+msgid "shop now"
+msgstr "indi alış-veriş et"
+
+#: core/templates/index.html:59
+msgid "Browse Categories"
+msgstr "Kateqoriyalara baxın"
+
+#: core/templates/index.html:231
+msgid "Latest News"
+msgstr "Son xəbərlər"
+
+#: core/templates/index.html:232
+msgid "you can check out latest blogs"
+msgstr "son bloglara baxa bilərsiniz"
+
+#: core/templates/index.html:232
+msgid "and  if you subscribe we can send daily blogs to you."
+msgstr "və abunə olsanız, sizə gündəlik blog göndərə bilərik"
+
+#: products/models.py:155
+msgid "Category"
+msgstr ""

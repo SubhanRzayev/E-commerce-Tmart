@@ -1,0 +1,123 @@
+{% load static i18n %}
+
+{% load custom_tags %}
+
+ <footer class="htc__foooter__area gray-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="footer__container clearfix">
+                         <!-- Start Single Footer Widget -->
+                        <div class="col-md-3 col-lg-3 col-sm-6">
+                            <div class="ft__widget">
+                                <div class="ft__logo">
+                                    <a href="index.html">
+                                        <img src="{% static 'images/logo/logo.png' %}" alt="footer logo">
+                                    </a>
+                                </div>
+                                <div class="footer-address">
+                                    <ul>
+                                        <li>
+                                            <div class="address-icon">
+                                                <i class="zmdi zmdi-pin"></i>
+                                            </div>
+                                            <div class="address-text">
+                                                <p>{% trans "Elektron hökümət (E-gov), 1-ci mərtəbə, 19 Ataturk  avenue, Baku 1069" %}</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="address-icon">
+                                                <i class="zmdi zmdi-email"></i>
+                                            </div>
+                                            <div class="address-text">
+                                                <a href="#"> info@tmart.com</a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="address-icon">
+                                                <i class="zmdi zmdi-phone-in-talk"></i>
+                                            </div>
+                                            <div class="address-text">
+                                                <p>+1 408-961-1560</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class="social__icon">
+                                    <li><a href="https://twitter.com/home"><i class="zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/"><i class="zmdi zmdi-instagram"></i></a></li>
+                                    <li><a href="https://www.facebook.com/"><i class="zmdi zmdi-facebook"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Footer Widget -->
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-3 col-lg-2 col-sm-6 smt-30 xmt-30">
+                            <div class="ft__widget">
+                                <h2 class="ft__title">{% trans "Categories" %}</h2>
+                                {% footer_categories as context %}
+                                {% for i in context %}
+                                <ul class="footer-categories">
+                                    <li><a href="shop-sidebar.html">{{i.title}}</a></li>
+                                </ul>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-3 col-lg-2 col-sm-6 smt-30 xmt-30">
+                            <div class="ft__widget">
+                                <h2 class="ft__title">{% trans 'Information' %}</h2>
+                                <ul class="footer-categories">
+                                    <li><a href="{% url 'core:about' %}">{% trans 'About Us' %}</a></li>
+                                    <li><a href="{% url 'core:team' %}">{% trans "Team" %}</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-3 col-lg-3 col-lg-offset-1 col-sm-6 smt-30 xmt-30">
+                            <div class="ft__widget">
+                                <h2 class="ft__title">{% trans "Newsletter" %}</h2>
+                                <div class="newsletter__form">
+                                    <p>{% trans "Subscribe to our newsletter and get 10% off your first purchase ." %}</p>
+                                    <div class="input__box">
+                                        <div id="mc_embed_signup">
+                                            <form action="" method="post" id="subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                                                    {% csrf_token %}
+                                                <div id="mc_embed_signup_scroll" class="htc__news__inner">
+                                                    <div class="news__input">
+                                                        <input type="email" value="" name="email" class="email" id="mce-EMAIL" placeholder="Email Address" required>
+                                                    </div>
+                                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
+                                                    <div class="clearfix subscribe__btn"><input type="submit" value="Send" name="subscribe" id="mc-embedded-subscribe" class="bst__btn btn--white__color">
+                                                    </div>      
+                                                    <ul id="error-list" style="list-style-type: none">
+
+                                                    </ul>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>        
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Footer Widget -->
+                    </div>
+                </div>
+                <!-- Start Copyright Area -->
+                <div class="htc__copyright__area">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="copyright__inner">
+                                <div class="copyright">
+                                    <p>© 2017 <a href="https://freethemescloud.com/">{% trans "Free themes Cloud" %}</a>
+                                    {% trans "All Right Reserved" %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Copyright Area -->
+            </div>
+</footer>

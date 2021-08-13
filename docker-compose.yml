@@ -1,0 +1,58 @@
+version: '3.1'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web
+    volumes:
+      - ./static/:/code/static/
+      
+  # 8ddbb84d9a4d
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdb:/var/lib/postgresql/data
+    env_file: ./.env
+
+  web:
+    build: .
+    restart: "always"
+    command: gunicorn --bind  0.0.0.0 -p 8000 Tmart.wsgi
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code/
+      - ./static/:/code/static/
+    depends_on:
+      - "db"
+    env_file: ./.env
+    environment:
+      - VIRTUAL_HOST=localhost,35.226.246.115
+      - VIRTUAL_PORT=8000
+      - HTTP_PORT=8000
+      
+  redis:
+    image: redis
+    restart: always
+    ports: 
+      -  6379:6379
+  
+  celery:
+    build: 
+      context: .
+      dockerfile: celery.dockerfile
+    restart: always
+    command: celery -A Tmart worker --beat --scheduler django --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - "db"
+      - "redis"
+    env_file: ./.env
+
